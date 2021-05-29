@@ -1,0 +1,9 @@
+---
+spring:
+  config.activate.on-profile: default
+  datasource:
+    url: "jdbc:sqlite:file::memory:?cache=shared"
+    driver-class-name: org.sqlite.JDBC
+    initialization-mode: always
+    hikari:
+      maximum-pool-size: 1
