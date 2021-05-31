@@ -7,3 +7,5 @@ spring:
     initialization-mode: always
     hikari:
       maximum-pool-size: 1
+cds:
+  odata-v4.endpoint.path: "/api"
