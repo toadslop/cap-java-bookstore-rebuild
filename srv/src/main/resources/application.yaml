@@ -1,5 +1,6 @@
 ---
 spring:
+  web.resources.static-locations: "file:./app"
   config.activate.on-profile: default
   datasource:
     url: "jdbc:sqlite:file::memory:?cache=shared"
