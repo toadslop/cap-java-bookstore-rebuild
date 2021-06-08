@@ -17,6 +17,14 @@ annotate CatalogService.Books with @(UI : {
     {
       Value : genre,
       Label : 'Genre'
+    },
+    {
+      Value : descr,
+      ![@UI.Hidden]
+    },
+    {
+      Value : id,
+      ![@UI.Hidden]
     }
   ],
 });
