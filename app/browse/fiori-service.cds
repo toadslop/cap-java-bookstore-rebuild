@@ -1,23 +1,17 @@
 using CatalogService from '../../srv/cat-service';
 
 annotate CatalogService.Books with @(UI : {
-  HeaderInfo : {
+  HeaderInfo      : {
     TypeName       : 'Book',
     TypeNamePlural : 'Books',
   },
-  LineItem   : [
+  LineItem        : [
     {
       Value : title,
       Label : 'Title'
     },
-    {
-      Value : author,
-      Label : 'Author'
-    },
-    {
-      Value : genre,
-      Label : 'Genre'
-    },
+    {Value : author},
+    {Value : genre},
     {
       Value : descr,
       ![@UI.Hidden]
@@ -26,5 +20,9 @@ annotate CatalogService.Books with @(UI : {
       Value : id,
       ![@UI.Hidden]
     }
+  ],
+  SelectionFields : [
+    author,
+    genre
   ],
 });
