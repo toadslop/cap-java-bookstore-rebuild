@@ -1,11 +1,11 @@
 using CatalogService from '../../srv/cat-service';
 
 annotate CatalogService.Books with @(UI : {
-  HeaderInfo      : {
+  HeaderInfo          : {
     TypeName       : 'Book',
     TypeNamePlural : 'Books',
   },
-  LineItem        : [
+  LineItem            : [
     {
       Value : title,
       Label : 'Title'
@@ -21,8 +21,13 @@ annotate CatalogService.Books with @(UI : {
       ![@UI.Hidden]
     }
   ],
-  SelectionFields : [
+  SelectionFields     : [
     author,
     genre
   ],
+  PresentationVariant : {
+    Text           : 'Default',
+    SortOrder      : [{Property : title}],
+    Visualizations : ['@UI.LineItem']
+  },
 });
