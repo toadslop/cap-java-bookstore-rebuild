@@ -12,6 +12,7 @@ annotate CatalogService.Books with @(UI : {
     },
     {Value : author},
     {Value : genre},
+    {Value : price},
     {
       Value : descr,
       ![@UI.Hidden]
@@ -30,4 +31,7 @@ annotate CatalogService.Books with @(UI : {
     SortOrder      : [{Property : title}],
     Visualizations : ['@UI.LineItem']
   },
-});
+}) {
+    @Measures.ISOCurrency : currency.code
+    price
+};
