@@ -1,5 +1,5 @@
 ### Get all books
-GET http://localhost:8080/odata/v4/CatalogService/Books HTTP/1.1
+GET http://admin:admin@host:8080/api/browse/Reviews/Books HTTP/1.1
 
 
 ### Create a book
@@ -7,7 +7,6 @@ POST http://admin:admin@localhost:8080/api/browse/Books HTTP/1.1
 content-type: application/json
 
 {
-  "id": 9,
   "title": "Wuthering Heights",
   "descr": "Wuthering Heights, Emily Brontë's only novel, was published in 1847 under the pseudonym Ellis Bell. It was written between October 1845 and June 1846. Wuthering Heights and Anne Brontë's Agnes Grey were accepted by publisher Thomas Newby before the success of their sister Charlotte's novel Jane Eyre. After Emily's death, Charlotte edited the manuscript of Wuthering Heights and arranged for the edited version to be published as a posthumous second edition in 1850.",
   "author": "Jane Austen",
@@ -16,11 +15,11 @@ content-type: application/json
 }
 
 ### Get the book
-GET http://localhost:8080/odata/v4/CatalogService/Books(id=1) HTTP/1.1
+GET http://admin:admin@host:8080/api/browse/Reviews/Books(f846b0b9-01d4-4f6d-82a4-d79204f62278) HTTP/1.1
 
 
 ### Update the book
-PATCH http://localhost:8080/odata/v4/CatalogService/Books(1) HTTP/1.1
+PATCH http://admin:admin@localhost:8080/api/browse/Reviews/Books(f846b0b9-01d4-4f6d-82a4-d79204f62278) HTTP/1.1
 content-type: application/json
 
 {
@@ -28,5 +27,54 @@ content-type: application/json
 }
 
 ### Delete the book
-DELETE http://localhost:8080/odata/v4/CatalogService/Books(id=1) HTTP/1.1
+DELETE http://admin:admin@localhost:8080/api/browse/Reviews/Books(f846b0b9-01d4-4f6d-82a4-d79204f62278) HTTP/1.1
 content-type: application/json
+
+### Get all Reviews
+GET http://admin:admin@localhost:8080/api/browse/Reviews HTTP/1.1
+
+
+### Create a Review
+POST http://admin:admin@localhost:8080/api/browse/Reviews HTTP/1.1
+content-type: application/json
+
+{
+  "title": "I hated it",
+  "text": "Birds freak me out",
+  "rating": 1,
+  "book_ID": "51061ce3-ddde-4d70-a2dc-6314afbcc73e"
+}
+
+### Get a Review
+GET http://admin:admin@localhost:8080/api/browse/Reviews(8089768a-14ae-3cd0-807e-c77ceab8f91e) HTTP/1.1
+
+
+### Update a review
+PATCH http://admin:admin@localhost:8080/api/browse/Reviews(8089768a-14ae-3cd0-807e-c77ceab8f91e) HTTP/1.1
+content-type: application/json
+
+{
+  "rating": 2
+}
+
+### Delete a rating
+DELETE http://admin:admin@localhost:8080/api/browse/Reviews(8089768a-14ae-3cd0-807e-c77ceab8f91e) HTTP/1.1
+content-type: application/json
+
+### Get all reviews for a book
+GET http://admin:admin@localhost:8080/api/browse/Books(f846b0b9-01d4-4f6d-82a4-d79204f62278)/reviews HTTP/1.1
+content-type: application/json
+
+### Get a review through a book
+GET http://admin:admin@localhost:8080/api/browse/Books(f846b0b9-01d4-4f6d-82a4-d79204f62278)/reviews(8098ea0a-e4b9-3265-9a21-95758a1e49e0) HTTP/1.1
+content-type: application/json
+
+### Create a review through a book
+POST http://admin:admin@localhost:8080/api/browse/Books(f846b0b9-01d4-4f6d-82a4-d79204f62278)/reviews HTTP/1.1
+content-type: application/json
+
+{
+  "title": "I hated it",
+  "text": "Birds freak me out",
+  "rating": 1
+}
