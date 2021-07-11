@@ -9,12 +9,12 @@ annotate CatalogService.Books with @(UI : {
     {Value : title},
     {Value : author},
     {Value : genre},
-    {Value : price},
     {
       $Type  : 'UI.DataFieldForAnnotation',
       Target : '@UI.DataPoint#rating',
       Label  : '{i18n>Rating}'
     },
+    {Value : price},
     {
       Value : descr,
       ![@UI.Hidden]
