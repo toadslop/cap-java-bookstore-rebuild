@@ -9,6 +9,6 @@ using {
 entity Reviews : cuid, managed {
     book   : Association to bookshop.Books;
     rating : bookshop.Rating @assert.range;
-    title  : String(100)     @mandatory;
-    text   : String(1000)    @mandatory;
+    title  : bookshop.Title  @mandatory;
+    text   : bookshop.Text   @mandatory;
 }

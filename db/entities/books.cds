@@ -7,10 +7,10 @@ using {
 } from '@sap/cds/common';
 
 entity Books : cuid {
-  title    : String(100);
-  descr    : String(1000);
-  author   : String(100);
-  genre    : String(100);
+  title    : bookshop.Name;
+  descr    : bookshop.Text;
+  author   : bookshop.Name;
+  genre    : bookshop.Name;
   rating   : Decimal(2, 1)@assert.range : [
     0.0,
     5.0
