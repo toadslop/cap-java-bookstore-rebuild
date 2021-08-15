@@ -1,6 +1,6 @@
 namespace toadslop.bookshop;
 
-using {toadslop.bookshop as bookshop} from './index';
+using {toadslop.bookshop as bookshop} from '../index';
 using {
     cuid,
     managed
