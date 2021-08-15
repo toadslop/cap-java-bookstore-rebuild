@@ -11,5 +11,8 @@
         "model": "*"
       }
     }
+  },
+  "dependencies": {
+    "@sap/cds-dk": "^4.4.1"
   }
 }
