@@ -1,5 +1,8 @@
+### Get metadata
+GET http://admin:admin@localhost:8080/api/browse/$metadata HTTP/1.1
+
 ### Get all books
-GET http://admin:admin@host:8080/api/browse/Reviews/Books HTTP/1.1
+GET http://admin:admin@localhost:8080/api/browse/Books HTTP/1.1
 
 
 ### Create a book
@@ -15,11 +18,11 @@ content-type: application/json
 }
 
 ### Get the book
-GET http://admin:admin@host:8080/api/browse/Reviews/Books(f846b0b9-01d4-4f6d-82a4-d79204f62278) HTTP/1.1
+GET http://admin:admin@localhost:8080/api/browse/Books(f846b0b9-01d4-4f6d-82a4-d79204f62278) HTTP/1.1
 
 
 ### Update the book
-PATCH http://admin:admin@localhost:8080/api/browse/Reviews/Books(f846b0b9-01d4-4f6d-82a4-d79204f62278) HTTP/1.1
+PATCH http://admin:admin@localhost:8080/api/browse/Books(f846b0b9-01d4-4f6d-82a4-d79204f62278) HTTP/1.1
 content-type: application/json
 
 {
@@ -27,7 +30,7 @@ content-type: application/json
 }
 
 ### Delete the book
-DELETE http://admin:admin@localhost:8080/api/browse/Reviews/Books(f846b0b9-01d4-4f6d-82a4-d79204f62278) HTTP/1.1
+DELETE http://admin:admin@localhost:8080/api/browse/Books(f846b0b9-01d4-4f6d-82a4-d79204f62278) HTTP/1.1
 content-type: application/json
 
 ### Get all Reviews
@@ -57,7 +60,7 @@ content-type: application/json
   "rating": 2
 }
 
-### Delete a rating
+### Delete a review
 DELETE http://admin:admin@localhost:8080/api/browse/Reviews(8089768a-14ae-3cd0-807e-c77ceab8f91e) HTTP/1.1
 content-type: application/json
 
@@ -71,6 +74,16 @@ content-type: application/json
 
 ### Create a review through a book
 POST http://admin:admin@localhost:8080/api/browse/Books(f846b0b9-01d4-4f6d-82a4-d79204f62278)/reviews HTTP/1.1
+content-type: application/json
+
+{
+  "title": "I hated it",
+  "text": "Birds freak me out",
+  "rating": 1
+}
+
+### Create a review using the addReview method
+POST http://admin:admin@localhost:8080/api/browse/Books(f846b0b9-01d4-4f6d-82a4-d79204f62278)/CatalogService.addReview HTTP/1.1
 content-type: application/json
 
 {
