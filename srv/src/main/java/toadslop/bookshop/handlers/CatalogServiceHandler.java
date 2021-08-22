@@ -7,6 +7,7 @@ import com.sap.cds.services.handler.annotations.On;
 import org.springframework.stereotype.Component;
 
 import cds.gen.catalogservice.CatalogService_;
+import cds.gen.catalogservice.Reviews;
 import cds.gen.catalogservice.AddReviewContext;
 
 @Component
@@ -14,8 +15,14 @@ import cds.gen.catalogservice.AddReviewContext;
 public class CatalogServiceHandler implements EventHandler {
 
     @On(event = AddReviewContext.CDS_NAME)
-    public void addReview() {
-        System.out.println("Triggered the action!");
+    public void addReview(AddReviewContext context) {
+
+        Reviews review = Reviews.create();
+        review.setText(context.getTitle());
+        review.setRating(context.getRating());
+        review.setText(context.getText());
+
+        context.setCompleted();
     }
 
 }
