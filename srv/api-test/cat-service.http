@@ -49,7 +49,7 @@ content-type: application/json
 }
 
 ### Get a Review
-GET http://admin:admin@localhost:8080/api/browse/Reviews(8089768a-14ae-3cd0-807e-c77ceab8f91e) HTTP/1.1
+GET http://admin:admin@localhost:8080/api/browse/Reviews(d9ad2ed9-9ef8-4ae2-85c4-11ae724ac1aa) HTTP/1.1
 
 
 ### Update a review

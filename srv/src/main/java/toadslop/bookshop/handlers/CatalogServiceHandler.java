@@ -1,5 +1,6 @@
 package toadslop.bookshop.handlers;
 
+import com.sap.cds.Result;
 import com.sap.cds.ql.Insert;
 import com.sap.cds.ql.cqn.CqnAnalyzer;
 import com.sap.cds.ql.cqn.CqnInsert;
@@ -37,14 +38,14 @@ public class CatalogServiceHandler implements EventHandler {
 
         Reviews review = Reviews.create();
         review.setBookId(bookId);
-        review.setText(context.getTitle());
-        review.setRating(context.getRating());
         review.setText(context.getText());
+        review.setRating(context.getRating());
+        review.setTitle(context.getTitle());
 
         CqnInsert reviewInsert = Insert.into(Reviews_.CDS_NAME).entry(review);
-        db.run(reviewInsert);
+        Reviews savedReview = db.run(reviewInsert).single(Reviews.class);
 
-        context.setCompleted();
+        context.setResult(savedReview);
     }
 
 }
