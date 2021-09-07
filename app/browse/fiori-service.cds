@@ -19,6 +19,11 @@ annotate CatalogService.Books with @(UI : {
       Value : descr,
       ![@UI.Hidden]
     },
+    {
+      $Type: 'UI.DataFieldForAnnotation',
+      Label: 'Add Review',
+      Target: '@UI.FieldGroup#AddReview'
+    }
   ],
   SelectionFields     : [
     author,
@@ -33,7 +38,13 @@ annotate CatalogService.Books with @(UI : {
     Value         : rating,
     Visualization : #Rating,
     TargetValue   : 5
-  }
+  },
+  FieldGroup #AddReview : {Data: [{
+    $Type : 'UI.DataFieldForAction',
+    Label : 'Add Review',
+    Action : 'CatalogService.Reviews',
+    InvocationGrouping : #ISOLATED,
+  }]}
 }) {
   @UI.HiddenFilter
   descr;
