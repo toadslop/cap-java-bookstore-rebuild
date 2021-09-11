@@ -21,8 +21,8 @@ annotate CatalogService.Books with @(UI : {
     },
     {
       $Type: 'UI.DataFieldForAnnotation',
+      Target: '@UI.FieldGroup#AddReview',
       Label: 'Add Review',
-      Target: '@UI.FieldGroup#AddReview'
     }
   ],
   SelectionFields     : [
@@ -42,7 +42,7 @@ annotate CatalogService.Books with @(UI : {
   FieldGroup #AddReview : {Data: [{
     $Type : 'UI.DataFieldForAction',
     Label : 'Add Review',
-    Action : 'CatalogService.Reviews',
+    Action : 'CatalogService.addReview',
     InvocationGrouping : #ISOLATED,
   }]}
 }) {
