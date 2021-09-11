@@ -52,7 +52,17 @@
 					"name": "sap.fe.templates.ListReport",
 					"options": {
 						"settings": {
-							"entitySet": "Books"
+							"entitySet": "Books",
+							"controlConfiguration": {
+                                "@com.sap.vocabularies.UI.v1.LineItem": {
+                                    "columns": {
+                                        "CustomColumnRating": {
+                                            "header": "CUSTOM",
+                                            "template": "bookshop.custom.CustomColumnButton"
+                                        }
+                                    }
+                                }
+                            }
 						}
 					}
 				}

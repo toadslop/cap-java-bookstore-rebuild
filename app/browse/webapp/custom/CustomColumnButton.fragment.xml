@@ -1,0 +1,5 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout">
+	<l:VerticalLayout core:require="{handler: 'bookshop/custom/CustomColumn'}">
+		<Button text="Custom Button" press="handler.buttonPressed" />
+	</l:VerticalLayout>
+</core:FragmentDefinition>
