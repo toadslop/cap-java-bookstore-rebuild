@@ -1,66 +1,76 @@
 {
-	"_version": "1.8.0",
-	"sap.app": {
-		"id": "bookshop",
-		"type": "application",
-		"title": "Browse Books",
-		"description": "Find your favorite book",
-		"dataSources": {
-			"CatalogService": {
-				"uri": "/api/browse/",
-				"type": "OData",
-				"settings": {
-					"odataVersion": "4.0"
-				}
-			}
-		}
-	},
-	"sap.ui5": {
-		"dependencies": {
-			"libs": {
-				"sap.fe.templates": {}
-			}
-		},
-		"models": {
-			"": {
-				"dataSource": "CatalogService",
-				"settings": {
-					"synchronizationMode": "None",
-					"operationMode": "Server",
-					"autoExpandSelect": true,
-					"earlyRequests": true,
-					"groupProperties": {
-						"default": {
-							"submit": "Auto"
-						}
-					}
-				}
-			}
-		},
-		"routing": {
-			"routes": [
-				{
-					"pattern": ":?query:",
-					"name": "BooksList",
-					"target": "BooksList"
-				}
-			],
-			"targets": {
-				"BooksList": {
-					"type": "Component",
-					"id": "BooksList",
-					"name": "sap.fe.templates.ListReport",
-					"options": {
-						"settings": {
-							"entitySet": "Books"
-						}
-					}
-				}
-			}
-		}
-	},
-	"sap.ui": {
-		"technology": "UI5",
-		"fullWidth": false
-	}
+  "_version": "1.8.0",
+  "sap.app": {
+    "id": "bookshop",
+    "type": "application",
+    "title": "Browse Books",
+    "description": "Find your favorite book",
+    "dataSources": {
+      "CatalogService": {
+        "uri": "/api/browse/",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "4.0"
+        }
+      }
+    }
+  },
+  "sap.ui5": {
+    "dependencies": {
+      "libs": {
+        "sap.fe.templates": {}
+      }
+    },
+    "models": {
+      "": {
+        "dataSource": "CatalogService",
+        "settings": {
+          "synchronizationMode": "None",
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true,
+          "groupProperties": {
+            "default": {
+              "submit": "Auto"
+            }
+          }
+        }
+      }
+    },
+    "routing": {
+      "routes": [
+        {
+          "pattern": ":?query:",
+          "name": "BooksList",
+          "target": "BooksList"
+        }
+      ],
+      "targets": {
+        "BooksList": {
+          "type": "Component",
+          "id": "BooksList",
+          "name": "sap.fe.templates.ListReport",
+          "options": {
+            "settings": {
+              "entitySet": "Books",
+              "controlConfiguration": {
+                "@com.sap.vocabularies.UI.v1.LineItem": {
+                  "columns": {
+                    "AddReviewColumn": {
+                      "header": "Add Review",
+                      "template": "bookshop.custom.AddReview.AddReviewButton"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "fullWidth": false
+  }
 }
