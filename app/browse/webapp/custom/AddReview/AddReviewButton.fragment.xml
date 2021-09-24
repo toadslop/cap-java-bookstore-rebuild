@@ -6,6 +6,6 @@
 		core:require="{handler: 'bookshop/custom/AddReview/AddReviewButtonHandler'}">
 		<Button
 			text="Add Review"
-			press="handler.onPress" />
+			press="handler.openDialog" />
 	</l:VerticalLayout>
 </core:FragmentDefinition>
