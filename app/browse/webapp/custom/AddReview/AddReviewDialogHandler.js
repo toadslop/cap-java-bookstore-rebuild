@@ -24,6 +24,17 @@ sap.ui.define(
         oAddReviewForm.bindAggregation("formContainers", {
           path: `${sRowBindingPath}/reviews`,
           template: oContainerTemplate,
+          length: 1,
+          parameters: {
+            $$updateGroupId: "reviews",
+          },
+        });
+
+        const oReviewBinding = oAddReviewForm.getBinding("formContainers");
+        oReviewBinding.create({
+          rating: 0,
+          title: "",
+          text: "",
         });
       },
 
