@@ -4,8 +4,9 @@ sap.ui.define([], function () {
   const getAddReviewDialog = (oEvent) => oEvent.getSource().getParent();
 
   return {
-    beforeOpenDialog: function () {
+    beforeOpenDialog: function (oEvent, oParams) {
       console.log("BEFORE OPEN RAN");
+      console.log("PARAMS", oParams);
     },
 
     submit: function (oEvent) {
