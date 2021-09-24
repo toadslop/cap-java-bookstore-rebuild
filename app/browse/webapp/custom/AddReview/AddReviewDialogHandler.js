@@ -1,20 +1,39 @@
-sap.ui.define([], function () {
-  "use strict";
+sap.ui.define(
+  [
+    "sap/ui/core/Fragment",
+    "sap/ui/layout/form/FormContainer",
+    "sap/ui/layout/form/FormElement",
+    "sap/m/Input",
+  ],
+  function (Fragment, FormContainer, FormElement, Input) {
+    "use strict";
 
-  const getAddReviewDialog = (oEvent) => oEvent.getSource().getParent();
+    const getAddReviewDialog = (oEvent) => oEvent.getSource().getParent();
 
-  return {
-    beforeOpenDialog: function (oEvent, oParams) {
-      console.log("BEFORE OPEN RAN");
-      console.log("PARAMS", oParams);
-    },
+    const oContainerTemplate = new FormContainer();
+    const oTitleElement = new FormElement({ label: "Title" });
+    const oTitleInput = new Input({ value: "{title}" });
+    oTitleElement.addField(oTitleInput);
+    oContainerTemplate.addFormElement(oTitleElement);
 
-    submit: function (oEvent) {
-      getAddReviewDialog(oEvent).close();
-    },
+    return {
+      beforeOpenDialog: function (oEvent, oParams) {
+        const { sRowBindingPath, sReviewDialogId } = oParams;
+        const oAddReviewForm = Fragment.byId(sReviewDialogId, "addReviewForm");
 
-    cancel: function (oEvent) {
-      getAddReviewDialog(oEvent).close();
-    },
-  };
-});
+        oAddReviewForm.bindAggregation("formContainers", {
+          path: `${sRowBindingPath}/reviews`,
+          template: oContainerTemplate,
+        });
+      },
+
+      submit: function (oEvent) {
+        getAddReviewDialog(oEvent).close();
+      },
+
+      cancel: function (oEvent) {
+        getAddReviewDialog(oEvent).close();
+      },
+    };
+  }
+);

@@ -6,6 +6,14 @@
    <Dialog
       title="Add Review"
       core:require="{handler: 'bookshop/custom/AddReview/AddReviewDialogHandler'}">
+      <f:Form
+         id="addReviewForm"
+         editable="true"
+         title="Review Details">
+         <f:layout>
+            <f:ColumnLayout />
+         </f:layout>
+      </f:Form>
       <buttons>
         <Button
             id="submitReview"
