@@ -5,7 +5,9 @@
 	xmlns:core="sap.ui.core">
    <Dialog
       title="Add Review"
-      core:require="{handler: 'bookshop/custom/AddReview/AddReviewDialogHandler'}">
+      core:require="{handler: 'bookshop/custom/AddReview/AddReviewDialogHandler'}"
+      validationError="handler.onValidationError"
+      validationSuccess="handler.onValidationSuccess">
       <f:Form
          id="addReviewForm"
          editable="true"
@@ -19,7 +21,8 @@
             id="submitReview"
             text="Submit"
             type="Emphasized"
-            press="handler.submit" />
+            press="handler.submit"
+            enabled="{= !${formErrors>/hasErrors} }" />
         <Button
             id="cancelReview"
             press="handler.cancel"

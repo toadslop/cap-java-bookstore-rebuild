@@ -1,14 +1,35 @@
 sap.ui.define(
-  ["sap/ui/core/Fragment", "./createAddReviewFormContainer"],
-  function (Fragment, createAddReviewFormContainer) {
+  [
+    "sap/ui/core/Fragment",
+    "./createAddReviewFormContainer",
+    "sap/ui/model/json/JSONModel",
+  ],
+  function (Fragment, createAddReviewFormContainer, JSONModel) {
     "use strict";
 
     const getAddReviewDialog = (oEvent) => oEvent.getSource().getParent();
 
+    const setInputError = (oInputElement, bHasError) => {
+      const oFormErrorModel = oInputElement.getModel("formErrors");
+      const oInputErrors = { ...oFormErrorModel.getProperty("/inputErrors") };
+      oInputErrors[oInputElement.getId()] = bHasError;
+      oFormErrorModel.setProperty("/inputErrors", oInputErrors);
+    };
+
     return {
       beforeOpenDialog: function (oEvent, oParams) {
+        const oFormErrorModel = new JSONModel({
+          get hasErrors() {
+            return Object.values(this.inputErrors).some((error) => error);
+          },
+          inputErrors: {},
+        });
+        oEvent.getSource().setModel(oFormErrorModel, "formErrors");
+
         const { sRowBindingPath, sReviewDialogId } = oParams;
+        this.sReviewDialogId = sReviewDialogId;
         const oAddReviewForm = Fragment.byId(sReviewDialogId, "addReviewForm");
+
         oAddReviewForm.bindAggregation("formContainers", {
           path: `${sRowBindingPath}/reviews`,
           template: createAddReviewFormContainer(),
@@ -19,6 +40,7 @@ sap.ui.define(
         });
 
         const oReviewBinding = oAddReviewForm.getBinding("formContainers");
+
         oReviewBinding.create({
           rating: 0,
           title: "",
@@ -43,6 +65,16 @@ sap.ui.define(
 
       cancel: function (oEvent) {
         getAddReviewDialog(oEvent).close();
+      },
+
+      onValidationError: function (oEvent) {
+        const oInputElement = oEvent.getParameter("element");
+        setInputError(oInputElement, true);
+      },
+
+      onValidationSuccess: function (oEvent) {
+        const oInputElement = oEvent.getParameter("element");
+        setInputError(oInputElement, false);
       },
     };
   }
