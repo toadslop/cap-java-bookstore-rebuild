@@ -8,7 +8,7 @@ using {
 
 entity Reviews : cuid, managed {
     book   : Association to bookshop.Books;
-    rating : bookshop.Rating @assert.range;
-    title  : bookshop.Name  @mandatory;
-    text   : bookshop.Text   @mandatory;
+    rating : bookshop.Rating;
+    title  : bookshop.Name @mandatory;
+    text   : bookshop.Text @mandatory;
 }

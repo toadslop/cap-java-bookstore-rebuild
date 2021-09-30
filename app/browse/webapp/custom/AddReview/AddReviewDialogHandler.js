@@ -30,9 +30,13 @@ sap.ui.define(
         this.sReviewDialogId = sReviewDialogId;
         const oAddReviewForm = Fragment.byId(sReviewDialogId, "addReviewForm");
 
+        if (!this.oFormContainerTemplate) {
+          this.oFormContainerTemplate = createAddReviewFormContainer();
+        }
+
         oAddReviewForm.bindAggregation("formContainers", {
           path: `${sRowBindingPath}/reviews`,
-          template: createAddReviewFormContainer(),
+          template: this.oFormContainerTemplate,
           length: 1,
           parameters: {
             $$updateGroupId: "reviews",
@@ -74,6 +78,7 @@ sap.ui.define(
 
       onValidationSuccess: function (oEvent) {
         const oInputElement = oEvent.getParameter("element");
+        oInputElement.setValueState("None");
         setInputError(oInputElement, false);
       },
     };
