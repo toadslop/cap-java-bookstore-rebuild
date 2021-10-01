@@ -7,7 +7,8 @@
       title="Add Review"
       core:require="{handler: 'bookshop/custom/AddReview/AddReviewDialogHandler'}"
       validationError="handler.onValidationError"
-      validationSuccess="handler.onValidationSuccess">
+      validationSuccess="handler.onValidationSuccess"
+      afterOpen="handler.onAfterOpen">
       <f:Form
          id="addReviewForm"
          editable="true"

@@ -2,9 +2,13 @@ sap.ui.define(
   [
     "sap/ui/core/Fragment",
     "./createAddReviewFormContainer",
-    "sap/ui/model/json/JSONModel",
+    "sap/ui/model/json/JSONModel"
   ],
-  function (Fragment, createAddReviewFormContainer, JSONModel) {
+  function (
+    Fragment,
+    createAddReviewFormContainer,
+    JSONModel,
+  ) {
     "use strict";
 
     const getAddReviewDialog = (oEvent) => oEvent.getSource().getParent();
@@ -17,12 +21,12 @@ sap.ui.define(
     };
 
     return {
-      beforeOpenDialog: function (oEvent, oParams) {
+      beforeOpenDialog: async function (oEvent, oParams) {
         const oFormErrorModel = new JSONModel({
           get hasErrors() {
             return Object.values(this.inputErrors).some((error) => error);
           },
-          inputErrors: {},
+          inputErrors: {}
         });
         oEvent.getSource().setModel(oFormErrorModel, "formErrors");
 
@@ -39,16 +43,16 @@ sap.ui.define(
           template: this.oFormContainerTemplate,
           length: 1,
           parameters: {
-            $$updateGroupId: "reviews",
-          },
+            $$updateGroupId: "reviews"
+          }
         });
 
         const oReviewBinding = oAddReviewForm.getBinding("formContainers");
 
-        oReviewBinding.create({
+        await oReviewBinding.create({
           rating: 0,
           title: "",
-          text: "",
+          text: ""
         });
       },
 
@@ -68,6 +72,13 @@ sap.ui.define(
       },
 
       cancel: function (oEvent) {
+        const oAddReviewDialog = getAddReviewDialog(oEvent);
+        const oAddReviewForm = Fragment.byId(
+          oAddReviewDialog.sReviewDialogId,
+          "addReviewForm"
+        );
+        const oReviewBinding = oAddReviewForm.getBinding("formContainers");
+        oReviewBinding.resetChanges();
         getAddReviewDialog(oEvent).close();
       },
 
@@ -78,9 +89,8 @@ sap.ui.define(
 
       onValidationSuccess: function (oEvent) {
         const oInputElement = oEvent.getParameter("element");
-        oInputElement.setValueState("None");
         setInputError(oInputElement, false);
-      },
+      }
     };
   }
 );

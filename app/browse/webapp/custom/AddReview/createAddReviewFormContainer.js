@@ -6,6 +6,7 @@ sap.ui.define(
     "sap/m/RatingIndicator",
     "sap/m/TextArea",
     "../annotations",
+    "../validators"
   ],
   function (
     FormContainer,
@@ -13,7 +14,8 @@ sap.ui.define(
     Input,
     RatingIndicator,
     TextArea,
-    annotations
+    annotations,
+    validators
   ) {
     "use strict";
 
@@ -29,40 +31,12 @@ sap.ui.define(
       return max || 5;
     };
 
-    const attachBindingChange = (oEvent) => {
-      const oInput = sap.ui.getCore().byId(oEvent.getParameter("id"));
+    const attachInitialValidation = (oEvent) => {
+      const oInput = oEvent.getSource();
       const requiredBinding = oInput.getBinding("required");
       if (requiredBinding) {
-        requiredBinding.attachChange({ oInput }, fireValidationIfRequired);
-      }
-    };
-
-    const fireValidationIfRequired = (oEvent, { oInput }) => {
-      const inputRequired = oInput.getRequired();
-      if (inputRequired) {
-        const sValue = oInput.getValue();
-        if (!sValue) {
-          oInput.fireValidationError({ element: oInput });
-        }
-      }
-    };
-
-    const executeRequiredValidation = (oEvent) => {
-      const oInput = oEvent.getSource();
-      const isRequired = oInput.getRequired();
-
-      if (isRequired) {
-        const sValue = oInput.getValue();
-        if (!sValue) {
-          const sFieldLabel = oInput.getParent().getAggregation("label");
-          oInput.fireValidationError({
-            element: oInput,
-            property: "value",
-            message: `${sFieldLabel} field cannot be blank`,
-          });
-        } else {
-          oInput.fireValidationSuccess({ element: oInput, property: "value" });
-        }
+        requiredBinding.detachChange(validators.notBlank);
+        requiredBinding.attachChange({ oInput, isInitial: true }, validators.notBlank);
       }
     };
 
@@ -76,9 +50,9 @@ sap.ui.define(
         },
       });
 
-      oTitleInput.attachModelContextChange(attachBindingChange);
-      oTitleInput.attachLiveChange(executeRequiredValidation);
-      oTitleInput.attachChange(executeRequiredValidation);
+      oTitleInput.attachModelContextChange(attachInitialValidation);
+      oTitleInput.attachLiveChange(validators.notBlank);
+      oTitleInput.attachChange(validators.notBlank);
 
       oTitleElement.addField(oTitleInput);
 
@@ -113,20 +87,20 @@ sap.ui.define(
         },
       });
 
-      oComentInput.attachModelContextChange(attachBindingChange);
-      oComentInput.attachLiveChange(executeRequiredValidation);
-      oComentInput.attachChange(executeRequiredValidation);
+      oComentInput.attachModelContextChange(attachInitialValidation);
+      oComentInput.attachLiveChange(validators.notBlank);
+      oComentInput.attachChange(validators.notBlank);
 
       oComentElement.addField(oComentInput);
 
       return oComentElement;
     };
 
-    return (oMetadata) => {
+    return () => {
       const oContainerTemplate = new FormContainer();
-      const oTitleElement = createTitleElement(oMetadata);
-      const oRatingElement = createRatingElement(oMetadata);
-      const oComentElement = createCommentElement(oMetadata);
+      const oTitleElement = createTitleElement();
+      const oRatingElement = createRatingElement();
+      const oComentElement = createCommentElement();
 
       oContainerTemplate.addFormElement(oTitleElement);
       oContainerTemplate.addFormElement(oRatingElement);
